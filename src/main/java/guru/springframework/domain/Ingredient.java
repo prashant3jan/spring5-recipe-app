@@ -14,7 +14,7 @@ public class Ingredient {
     private BigDecimal amount;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id", insertable=false, updatable=false)
     private Recipe recipe;
 
     public Long getId() {
