@@ -1,6 +1,8 @@
 package guru.springframework.repositories;
 
+import guru.springframework.commands.IngredientCommand;
 import guru.springframework.domain.Category;
+import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
 import org.springframework.data.repository.CrudRepository;
 
