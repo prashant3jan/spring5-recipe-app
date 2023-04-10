@@ -51,17 +51,4 @@ public class Recipe {
         return this;
     }
 
-    @Override
-    public String toString() {
-        return "Recipe{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", prepTime=" + prepTime +
-                ", cookTime=" + cookTime +
-                ", servings=" + servings +
-                ", source='" + source + '\'' +
-                ", url='" + url + '\'' +
-                ", directions='" + directions + '\'' +
-                '}';
-    }
 }
