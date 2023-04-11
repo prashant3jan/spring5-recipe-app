@@ -27,7 +27,7 @@ public class RecipeToRecipeCommandTest {
 
     @Before
     public void setUp() throws Exception {
-        converter = new RecipeToRecipeCommand(new CategoryToCategoryCommand(),new IngredientToIngredientCommand(), new NotesToNotesCommand());
+        converter = new RecipeToRecipeCommand(new CategoryToCategoryCommand(),new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand()), new NotesToNotesCommand());
     }
 
     @Test

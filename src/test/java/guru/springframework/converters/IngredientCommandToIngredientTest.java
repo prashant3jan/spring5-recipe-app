@@ -20,7 +20,7 @@ public class IngredientCommandToIngredientTest {
 
     @Before
     public void setUp() throws Exception {
-        converter= new IngredientCommandToIngredient();
+        converter= new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
     }
 
     @Test
