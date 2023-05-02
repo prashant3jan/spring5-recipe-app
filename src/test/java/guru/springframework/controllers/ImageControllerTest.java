@@ -11,6 +11,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.junit.Assert.assertEquals;
@@ -52,11 +53,19 @@ public class ImageControllerTest {
 
     @Test
     public void testHandleImagePost() throws Exception{
-        MockMultipartFile multipartFile = new MockMultipartFile("file",
-                "testing.txt", "text/plain", "Spring Framework Guru".getBytes());
-        this.mockMvc.perform(multipart("/recipe/1/image").file(multipartFile))
+//        MockMultipartFile multipartFile = new MockMultipartFile("file",
+//                "testing.txt", "text/plain", "Spring Framework Guru".getBytes());
+//        this.mockMvc.perform(MockMvcRequestBuilders.multipart("/recipe/1/image")
+//                .file(multipartFile)
+//                        .param("id","1"))
+//                .andExpect(status().is3xxRedirection())
+//                .andExpect(header().string("Location","/recipe/1/show"));
+        MockMultipartFile multipartFile = new MockMultipartFile("imagefile", "test.jpg", "image/jpeg", "test image content".getBytes());
+        this.mockMvc.perform(MockMvcRequestBuilders.multipart("/recipe/1/image")
+                        .file(multipartFile)
+                        .param("id", "1"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(header().string("Location","/recipe/1/show"));
+                .andExpect(header().string("Location", "/recipe/1/show"));
         verify(imageService,times(1)).saveImageFile(anyLong(),any());
     }
     @Test
