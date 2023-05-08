@@ -34,7 +34,9 @@ public class ImageControllerTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         controller = new ImageController(imageService, recipeService);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new ControllerExceptionHandler())
+                .build();
     }
 
     @Test
@@ -53,13 +55,6 @@ public class ImageControllerTest {
 
     @Test
     public void testHandleImagePost() throws Exception{
-//        MockMultipartFile multipartFile = new MockMultipartFile("file",
-//                "testing.txt", "text/plain", "Spring Framework Guru".getBytes());
-//        this.mockMvc.perform(MockMvcRequestBuilders.multipart("/recipe/1/image")
-//                .file(multipartFile)
-//                        .param("id","1"))
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(header().string("Location","/recipe/1/show"));
         MockMultipartFile multipartFile = new MockMultipartFile("imagefile", "test.jpg", "image/jpeg", "test image content".getBytes());
         this.mockMvc.perform(MockMvcRequestBuilders.multipart("/recipe/1/image")
                         .file(multipartFile)
@@ -92,5 +87,11 @@ public class ImageControllerTest {
         byte[] responseBytes = response.getContentAsByteArray();
         assertEquals(s.getBytes().length,responseBytes.length);
 
+    }
+    @Test
+    public void testGetImageNumberFormatException() throws Exception{
+        mockMvc.perform(get("/recipe/asdf/image"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("400error"));
     }
 }
